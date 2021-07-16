@@ -3,6 +3,15 @@ class Form{
 
     display(){
 
+        this.reset= createButton("reset");
+        this.reset.position(width-100, 50);
+
+        this.reset.mousePressed( ()=>{
+            database.ref('/').update({
+                playerCount:0,
+                gameState:0
+            })
+        } )
 
         this.title= createElement('h2')
         this.title.html("CAR RACING GAME")

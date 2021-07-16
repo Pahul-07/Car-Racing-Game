@@ -40,20 +40,31 @@ if(countRef.exists()){
 
     play (){
 
+        image(trackImg, 0, (-height*4), width,height*5);
+
         form.greetings.hide()
         textSize(30)
         text ("game start", 200, 200)
 
-        player.getInfoPlayer()
+        player.getInfoPlayer();
+        player.getRank();
         console.log(allPlayers);
 
+        if(player.distance>4100){
+          gameState=2;
+          //game.update(2);
+          player.rank++
+          player.updateRank();
+          myRank=player.rank;
+        }
+
         if(keyIsDown(UP_ARROW)){
-            player.distance += 50;
+            player.distance += 5;
             player.update()
         }
 
         var index=0;
-        var x = 200;
+        var x = 390;
 
         if(allPlayers !== undefined){
         var newY= 200
@@ -64,7 +75,7 @@ if(countRef.exists()){
     
         if( plr === "player" + player.index){
             fill ("red")
-            camera.position.x=  cars[index].x
+            camera.position.x=  width/2
             camera.position.y=  cars[index].y
         }
         else{
@@ -75,8 +86,17 @@ if(countRef.exists()){
            drawSprites();
 
            index ++
-           x += 200
+           x += 240
        }
     }
+    }
+
+    end(){
+        if(myRank === 4){
+            alert("You Lose  "+"My Rank : "+myRank);
+        }
+        else{
+            alert("You Won  "+"My Rank : "+myRank)
+        }    
     }
 }
